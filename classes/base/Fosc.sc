@@ -9,13 +9,30 @@ Fosc {
     classvar <tuning;
     classvar <>xmlVersion="4.0";
     /* --------------------------------------------------------------------------------------------------------
-    • *lilypondVersion
+    • *crossPlatformPath
     
+    Fosc.crossPlatformPath;
+    -------------------------------------------------------------------------------------------------------- */
+        *crossPlatformPath { |path|
+        ^Platform.case(
+            \linux,   { path.shellQuote },
+            \osx,     { path.shellQuote },
+			\windows, { if(path.contains(" ")) {
+				"\"" ++ path.replace($\\, $/) ++ "\""
+			} {
+				path.replace($\\, $/)
+			}
+		}
+        );
+	}
+    /* --------------------------------------------------------------------------------------------------------
+    • *lilypondVersion
+
     Fosc.lilypondVersion;
     -------------------------------------------------------------------------------------------------------- */
     *lilypondVersion {
         var str;
-        str = "% --version".format(this.lilypondPath).unixCmdGetStdOut;
+        str = "% --version".format(this.crossPlatformPath(lilypondPath)).unixCmdGetStdOut;
         str = str.copyRange(*[str.findRegexp("\\s[0-9]")[0][0]+1, min(str.find("\n"), str.find(" (")?99) - 1]);
         ^str;
     }
@@ -25,11 +42,11 @@ Fosc {
     Fosc.lilypondPath;
     -------------------------------------------------------------------------------------------------------- */ 
     *lilypondPath {
-        if (lilypondPath.isNil || { File.exists(lilypondPath).not }) {
-            error("LilyPond executable not found at: %.".format(lilypondPath));
+        if (lilypondPath.isNil || { File.exists(crossPlatformPath(lilypondPath)).not }) {
+            error("LilyPond executable not found at: %.".format(crossPlatformPath(lilypondPath)));
             ^nil;
         } {
-            ^lilypondPath;  
+            ^crossPlatformPath(lilypondPath);
         };
     }
     /* --------------------------------------------------------------------------------------------------------
