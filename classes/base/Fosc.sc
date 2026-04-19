@@ -17,13 +17,8 @@ Fosc {
         ^Platform.case(
             \linux,   { path.shellQuote },
             \osx,     { path.shellQuote },
-			\windows, { if(path.contains(" ")) {
-				"\"" ++ path.replace($\\, $/) ++ "\""
-			} {
-				path.replace($\\, $/)
-			}
-		}
-        );
+			\windows, { "\"" ++ path.replace("\\", "/") ++ "\"" }
+        )
 	}
     /* --------------------------------------------------------------------------------------------------------
     • *lilypondVersion

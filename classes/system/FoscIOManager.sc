@@ -154,16 +154,16 @@ FoscIOManager : Fosc {
 		"Converting to .+)$' | " ++
 		"grep -vE '^$'";
 
-		filterFindstr = "2>&1" ++
-		" | findstr /V /R /C:\"^Processing$\"" ++
-		" | findstr /V /R /C:\"^Parsing\\.\\.\\.$\"" ++
-		" | findstr /V /R /C:\"^Interpreting music\\.\\.\\.$\"" ++
-		" | findstr /V /R /C:\"^Preprocessing graphical objects\\.\\.\\.$\"" ++
-		" | findstr /V /R /C:\"^Finding the ideal number of pages\\.\\.\\.$\"" ++
-		" | findstr /V /R /C:\"^Fitting music on [0-9][0-9]* page[s]*\\.\\.\\.$\"" ++
-		" | findstr /V /R /C:\"^Drawing systems\\.\\.\\.$\"" ++
-		" | findstr /V /R /C:\"^Converting to .*$\"" ++
-		" | findstr /V /R /C:\"^$\"";
+		filterFindstr = "2>&1" +
+		"| findstr /V /R /C:\"^Processing$\"" +
+		"| findstr /V /R /C:\"^Parsing\\.\\.\\.$\"" +
+		"| findstr /V /R /C:\"^Interpreting music\\.\\.\\.$\"" +
+		"| findstr /V /R /C:\"^Preprocessing graphical objects\\.\\.\\.$\"" +
+		"| findstr /V /R /C:\"^Finding the ideal number of pages\\.\\.\\.$\"" +
+		"| findstr /V /R /C:\"^Fitting music on [0-9][0-9]* page[s]*\\.\\.\\.$\"" +
+		"| findstr /V /R /C:\"^Drawing systems\\.\\.\\.$\"" +
+		"| findstr /V /R /C:\"^Converting to .*$\"" +
+		"| findstr /V /R /C:\"^$\"";
 
 		command = "% % % %".format(
 			Fosc.crossPlatformPath(executablePath),
@@ -178,7 +178,6 @@ FoscIOManager : Fosc {
 			\windows, { Fosc.crossPlatformPath(command + filterFindstr) }
 		);
 
-		command.postln;
 		exitCode = systemCmd(commandWithFilterText);
 		success = (exitCode == 0);
 		if (success && clean) { File.delete(path) };
