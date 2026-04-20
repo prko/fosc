@@ -144,7 +144,7 @@ FoscIOManager : Fosc {
 		lilypondBase = path.splitext[0];
 		outputPath = outputPath ? lilypondBase;
 
-		flags = ((flags ? "") ++ " %").format("-dno-point-and-click -o");
+		flags = ((flags ? "") ++ "%").format("-dno-point-and-click -o");
 
 		filterGrep = "2>&1 | grep -vE " ++
 		"'^(Processing|Parsing\\.\\.\\.|Interpreting music\\.\\.\\.|" ++
