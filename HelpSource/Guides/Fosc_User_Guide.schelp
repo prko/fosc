@@ -1,4 +1,4 @@
-TITLE:: Fosc Guide
+TITLE:: Fosc User Guide
 summary:: A SuperCollider API for generating musical notation in LilyPond.
 categories:: Libraries>Music Notation
 related:: Classes/Fosc, Classes/FoscMusicMaker, Classes/FoscScore, Classes/FoscStaff, Classes/FoscVoice, Classes/FoscNote
