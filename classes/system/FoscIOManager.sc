@@ -174,7 +174,12 @@ FoscIOManager : Fosc {
 
 		commandWithFilterText = Platform.case(
 			\linux,   { command + filterGrep },
-			\osx,     { command + filterGrep },
+			\osx,     { if(Fosc.lilypondPath.contains("homebrew")) {
+					"zsh -lc" + (command + filterGrep).shellQuote
+				}{
+					command + filterGrep
+				}
+			},
 			\windows, { Fosc.crossPlatformPath(command + filterFindstr) }
 		);
 
