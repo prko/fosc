@@ -13,7 +13,7 @@ Fosc {
     
     Fosc.crossPlatformPath;
     -------------------------------------------------------------------------------------------------------- */
-        *crossPlatformPath { |path|
+    *crossPlatformPath { |path|
         ^Platform.case(
             \linux,   { path.shellQuote },
             \osx,     { path.shellQuote },
@@ -37,11 +37,11 @@ Fosc {
     Fosc.lilypondPath;
     -------------------------------------------------------------------------------------------------------- */ 
     *lilypondPath {
-        if (lilypondPath.isNil || { File.exists(crossPlatformPath(lilypondPath)).not }) {
-            error("LilyPond executable not found at: %.".format(crossPlatformPath(lilypondPath)));
+        if (lilypondPath.isNil || { File.exists(lilypondPath).not }) {
+            error("LilyPond executable not found at: %.".format(lilypondPath));
             ^nil;
         } {
-            ^crossPlatformPath(lilypondPath);
+            ^lilypondPath;  
         };
     }
     /* --------------------------------------------------------------------------------------------------------
