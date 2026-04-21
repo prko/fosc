@@ -396,7 +396,85 @@ c.show;
 ::
 image::img/README-19.svg::
 
-section::Play Fosc Score
+section::Playback
+
+subsection::Playback using the default synth
+
+code::
+(
+a = FoscChord([60,64,67], 1/4);
+a.play;
+)
+
+a.show
+::
+
+code::
+(
+a = FoscStaff(FoscLeafMaker().((60..72), [1/8]));
+a[0..].hairpin('pppp < ffff');
+a.play
+)
+
+a.show
+::
+
+code::
+(
+a = FoscStaff(FoscLeafMaker().((60..63), [1/32]));
+b = FoscStaff(FoscLeafMaker().((67..70), [1/32]));
+c = FoscScore([a, b]);
+c.play;
+)
+
+c.show
+::
+
+code::
+(
+a = FoscMusicMaker();
+b = a.(durations: 1/4 ! 10, divisions: #[[1,1,1,1]], mask: [1,2,3], pitches: (60..63));
+b.play;
+)
+
+b.show
+::
+
+subsection::Playback using pattern
+
+code::
+(
+a = FoscStaff(FoscLeafMaker().((60..63), [1/32]));
+p = a.pattern;
+p.play;
+)
+
+a.show
+::
+
+code::
+(
+a = FoscMusicMaker();
+b = a.(durations: 1/4 ! 10, divisions: #[[1,1,1,1]], mask: [1,2,3], pitches: (60..63));
+p = b.pattern;
+p.play;
+)
+
+a.show
+::
+
+code::
+(
+a = FoscStaff(FoscLeafMaker().((60..63), [1/32]));
+b = FoscStaff(FoscLeafMaker().((67..70), [1/32]));
+c = FoscScore([a, b]);
+p = c.pattern;
+p.play;
+)
+c.show
+::
+
+subsection:: Playback using custom synth
 
 You can use your own synthdefs with Fosc's play mechanism by accessing the pattern property of any Fosc components or selection:
 
@@ -416,6 +494,8 @@ a = FoscMusicMaker().(durations: [1/16], pitches: (60..72));
 p = Pbindf(a.pattern, \instrument, 'beep');
 p.play;
 )
+
+a.show
 ::
 
 You can access the eventList property of any Fosc component or selection for making your own modifications or additions:
@@ -424,6 +504,39 @@ code::
 a = FoscMusicMaker().(durations: [1/16], pitches: (60..72));
 a.eventList;
 ::
+
+subsection::Stop, Pause and resume
+
+subsubsection:: Stop
+
+code::
+(
+a = FoscLeafMaker().(#[60,62,nil].wrapExtend(12), [3/8,1/8,5/16,1/16]);
+a.play;
+)
+
+//a.isPlaying;
+a.stop;
+//a.isPlaying;
+
+a.show
+::
+
+subsubsection:: Pause and resume
+
+code::
+(
+a = FoscLeafMaker().(#[60,62,nil].wrapExtend(12), [3/8,1/8,5/16,1/16]);
+a.play;
+)
+
+a.pause;
+
+a.resume;
+
+a.show
+::
+
 
 section::License
 
