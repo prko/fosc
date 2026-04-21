@@ -425,10 +425,6 @@ a = FoscMusicMaker().(durations: [1/16], pitches: (60..72));
 a.eventList;
 ::
 
-section::Discussion
-
-This help file was converted from the project README. Markdown images were omitted during conversion. If you want, those can be reintroduced later as help-source assets or split into multiple class-specific schelp files.
-
 section::License
 
 strong::Fosc:: is free software available under version 3.0 of the GNU General Public License.
