@@ -396,6 +396,35 @@ c.show;
 ::
 image::img/README-19.svg::
 
+section::Play Fosc Score
+
+You can use your own synthdefs with Fosc's play mechanism by accessing the pattern property of any Fosc components or selection:
+
+code::
+s.boot;
+(
+SynthDef('beep', { |midinote, amp|
+var src;
+src = SinOsc.ar(midinote.midicps, 0, amp);
+src = src * EnvGen.kr(Env.perc, doneAction: 2);
+Out.ar(0, Pan2.ar(src, 0));
+}).add;
+)
+
+(
+a = FoscMusicMaker().(durations: [1/16], pitches: (60..72));
+p = Pbindf(a.pattern, \instrument, 'beep');
+p.play;
+)
+::
+
+You can access the eventList property of any Fosc component or selection for making your own modifications or additions:
+
+code::
+a = FoscMusicMaker().(durations: [1/16], pitches: (60..72));
+a.eventList;
+::
+
 section::Discussion
 
 This help file was converted from the project README. Markdown images were omitted during conversion. If you want, those can be reintroduced later as help-source assets or split into multiple class-specific schelp files.
