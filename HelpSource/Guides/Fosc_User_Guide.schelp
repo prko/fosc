@@ -505,7 +505,7 @@ a = FoscMusicMaker().(durations: [1/16], pitches: (60..72));
 a.eventList;
 ::
 
-subsection::Stop, Pause and resume
+subsection::Stop, pause and resume
 
 subsubsection:: Stop
 
